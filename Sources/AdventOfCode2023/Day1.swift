@@ -1,5 +1,5 @@
 //
-//  Day1Part1.swift
+//  Day1.swift
 //  AdventOfCode2023
 //
 //  Created by Prachi Gauriar on 12/13/23.
