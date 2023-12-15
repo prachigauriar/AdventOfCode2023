@@ -7,8 +7,8 @@
 
 import ArgumentParser
 import AsyncAlgorithms
-import Foundation
 import CommandLine
+import Foundation
 import RegexBuilder
 
 
@@ -47,7 +47,7 @@ struct Day2 : AsyncParsableCommand {
                 }
                 .reduce(0) { $0 + $1.id }
             
-            try writeLine(String(sumOfIDs))
+            print(sumOfIDs, to: &outputFileHandle)
         }
     }
     
@@ -59,7 +59,7 @@ struct Day2 : AsyncParsableCommand {
                 .compactMap(Game.init(gameString:))
                 .reduce(0) { $0 + $1.powerOfMinimalCubeSet }
             
-            try writeLine(String(sumOfPowersOfMinimalCubeSets))
+            print(sumOfPowersOfMinimalCubeSets, to: &outputFileHandle)
         }
     }
 }

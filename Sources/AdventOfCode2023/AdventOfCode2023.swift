@@ -14,7 +14,8 @@ struct AdventOfCode2023 : AsyncParsableCommand {
         abstract: "Advent of Code solutions.",
         subcommands: [
             Day1.self,
-            Day2.self
+            Day2.self,
+            Day3.self
         ]
     )
 }

@@ -20,7 +20,6 @@ struct CommandLinePlugin : CompilerPlugin {
 }
 
 
-
 public struct IOHandlingCommandMacro : ExtensionMacro, MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
@@ -29,7 +28,7 @@ public struct IOHandlingCommandMacro : ExtensionMacro, MemberMacro {
         conformingTo protocols: [TypeSyntax],
         in context: some SwiftSyntaxMacros.MacroExpansionContext
     ) throws -> [ExtensionDeclSyntax] {
-        return [try ExtensionDeclSyntax("extension \(type.trimmed) : AsyncParsableCommand, IOHandling { }")]
+        return [try ExtensionDeclSyntax("extension \(type.trimmed) : AsyncParsableCommand { }")]
     }
     
     

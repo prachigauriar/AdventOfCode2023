@@ -7,8 +7,8 @@
 
 import ArgumentParser
 import AsyncAlgorithms
-import Foundation
 import CommandLine
+import Foundation
 import RegexBuilder
 
 
@@ -26,7 +26,7 @@ struct Day1 : AsyncParsableCommand {
                 .compactMap(Int.init(part1InputLine:))
                 .reduce(0, +)
             
-            try writeLine(String(sumOfValues))
+            print(sumOfValues, to: &outputFileHandle)
         }
     }
     
@@ -38,7 +38,7 @@ struct Day1 : AsyncParsableCommand {
                 .compactMap(Int.init(part2InputLine:))
                 .reduce(0, +)
             
-            try writeLine(String(sumOfValues))
+            print(sumOfValues, to: &outputFileHandle)
         }
     }
 }
@@ -65,17 +65,7 @@ extension Int {
         let digitPattern = Regex {
             TryCapture {
                 ChoiceOf {
-                    .digit
-                    "zero"
-                    "one"
-                    "two"
-                    "three"
-                    "four"
-                    "five"
-                    "six"
-                    "seven"
-                    "eight"
-                    "nine"
+                    .digit; "zero"; "one"; "two"; "three"; "four"; "five"; "six"; "seven"; "eight"; "nine"
                 }
             } transform: { (capture) in
                 switch capture {

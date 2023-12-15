@@ -10,7 +10,7 @@ import Foundation
 
 
 @attached(member, names: named(inputPath), named(outputPath), named(inputFileHandle), named(outputFileHandle))
-@attached(extension, conformances: AsyncParsableCommand, IOHandling)
+@attached(extension, conformances: AsyncParsableCommand)
 public macro AsyncIOHandlingCommand() = #externalMacro(
     module: "CommandLineMacros",
     type: "IOHandlingCommandMacro"
