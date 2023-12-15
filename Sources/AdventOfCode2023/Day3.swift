@@ -71,7 +71,7 @@ fileprivate struct Schematic {
         
         
         var ratio: Int {
-            part1.number.value * part2.number.value
+            part1.value * part2.value
         }
     }
     
@@ -130,12 +130,12 @@ fileprivate struct Schematic {
             
             // Find part numbers on this line
             for number in candidateNumbers {
-                // Check overlap with the previous line
+                // Check adjacency with symbols from the previous line
                 var adjacentSymbol = symbolsFromPreviousLine.first { (symbol) in
                     number.paddedColumnRange.overlaps(symbol.columnRange)
                 }
 
-                // Check overlap with the current line
+                // Check adjacency with symbols from the current line
                 if adjacentSymbol == nil {
                     adjacentSymbol = rangesOfInterest.symbols.first { (symbol) in
                         number.paddedColumnRange.overlaps(symbol.columnRange)

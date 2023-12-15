@@ -47,21 +47,35 @@ public struct IOHandlingCommandMacro : ExtensionMacro, MemberMacro {
         var outputPath: String? = nil
         """
         
-        let inputFileHandle: DeclSyntax = """
-        lazy var inputFileHandle: FileHandle = {
-            return inputPath.flatMap { (path) in
-                FileHandle(forReadingAtPath: (path as NSString).standardizingPath)
-            } ?? .standardInput
+        let inputFileHandle: DeclSyntax = #"""
+        lazy var inputFileHandle: FileHandle = { () -> FileHandle in
+            guard let inputPath = (inputPath as? NSString)?.standardizingPath else {
+                return FileHandle.standardInput
+            }
+        
+            guard let fileHandle = FileHandle(forReadingAtPath: inputPath) else {
+                fatalError("Could not open input file at \(inputPath).")
+            }
+            
+            return fileHandle
         }()
-        """
+        """#
 
-        let outputFileHandle: DeclSyntax = """
+        let outputFileHandle: DeclSyntax = #"""
         lazy var outputFileHandle: FileHandle = {
-            return outputPath.flatMap { (path) in
-                FileHandle(forWritingAtPath: (path as NSString).standardizingPath)
-            } ?? .standardOutput
+            guard let outputPath = (outputPath as? NSString)?.standardizingPath else {
+                return FileHandle.standardOutput
+            }
+        
+            guard FileManager.default.createFile(atPath: outputPath, contents: nil),
+                  let fileHandle = FileHandle(forWritingAtPath: outputPath)
+            else {
+                fatalError("Could not open output file at \(outputPath).")
+            }
+        
+            return fileHandle
         }()
-        """
+        """#
 
         return [
             inputPath,
